@@ -35,52 +35,23 @@ def writeToFile(searchResults):
                 file.write(word + " ")
         file.write("\n")
 
-def combineTextFiles():
-    file = open("everything.txt", "a")
-
-    file0 = open('positiveTweets.txt', 'r')
-    for line in file0:
-        file.write(line + "\n")
-
-    #file1 = open('book1.txt', 'r')
-    #for line in file1:
-    #    file.write(line + "\n")
-
-    file2 = open('1liner.txt', 'r')
-    for line in file2:
-        file.write(line + "\n")
-
-    file3 = open('10ondate.txt', 'r')
-    for line in file3:
-        file.write(line + "\n")
-
-    file4 = open('jokes.txt', 'r')
-    for line in file4:
-        file.write(line)
-
-    file5 = open('book1.txt', 'r')
-    for line in file5:
-        file.write(line)
-
-    file6 = open('book3.txt', 'r')
-    for line in file6:
-        file.write(line)
-
-    file7 = open('book4.txt', 'r')
-    for line in file7:
-        file.write(line)
-
-
-
-
-
-
 def markov():
     tweetbot = MarkovBot()
     dirname = os.path.dirname(os.path.abspath(__file__))
-    combineTextFiles()
-    data = os.path.join(dirname, 'everything.txt')
-    tweetbot.read(data)
+    data1 = os.path.join(dirname, 'positiveTweets.txt')
+    data2 = os.path.join(dirname, '1liner.txt')
+    data3 = os.path.join(dirname, '10ondate.txt')
+    data4 = os.path.join(dirname, 'book1.txt')
+    data5 = os.path.join(dirname, 'book3.txt')
+    data6 = os.path.join(dirname, 'book4.txt')
+    data7 = os.path.join(dirname, 'jokes.txt')
+    tweetbot.read(data1)
+    tweetbot.read(data2)
+    tweetbot.read(data3)
+    tweetbot.read(data4)
+    tweetbot.read(data5)
+    tweetbot.read(data6)
+    tweetbot.read(data7)
 
     my_first_text = tweetbot.generate_text(25, seedword=[u'positive', u'purpose', u'motivation', u'happy'])
     print("tweetbot says:")
