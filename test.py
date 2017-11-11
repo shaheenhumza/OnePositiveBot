@@ -14,7 +14,22 @@ def tweetHelloWorld(api):
     api.update_status("Hello, World! #{}"
                       .format(random.randint(0, 10000)))
 
+def searchTweet(api, searchTerm):
+    searchResults = [status for status in tweepy.
+                     Cursor(api.search, q=searchTerm).items(100)]
+    return searchResults
+
+def replyToTweet(api, searchResults):
+    randomTweet = searchResults[random.randint(0, len(searchResults) - 1)]
+    tweet = ("@{} This is a demo search for our bot. Please dont use that language #{}"
+            .format(randomTweet.user.screen_name,
+            random.randint(0, 10000)))
+    tweetID = randomTweet.id
+    api.update_status(tweet, tweetID)
+
 
 if __name__ == "__main__":
     api = setTwitterAuth()
-    tweetHelloWorld(api)
+    keyword = "fuck"
+    searchResults = searchTweet(api, "\"" + keyword +"\"")
+    replyToTweet(api, searchResults)
