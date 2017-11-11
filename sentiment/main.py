@@ -14,11 +14,21 @@ def searchTweet(api, searchTerm):
                      Cursor(api.search, q=searchTerm).items(100)]
     return searchResults
 
-if __name__ == "__main__":
-	api = setTwitterAuth()
-	keyword = "depressed"
+def searchUsersFor(api, keyword):
+	f = open("usersToTweetTo.txt", "a")
 	searchResults = searchTweet(api, "\"" + keyword +"\"")
 	for item in searchResults:
 		if(classify(item.text) < -0.5):
-			print item.text
-			print classify(item.text)
+			f.write(item.user.screen_name)
+			f.write(" ")
+			f.write(str(item.id))
+			f.write("\n")
+
+
+
+api = setTwitterAuth()
+searchUsersFor(api, "depressed")
+print "finisheasasd"
+f = open("usersToTweetTo.txt", "a")
+f.write("----------------------")
+searchUsersFor(api, "suicide")
