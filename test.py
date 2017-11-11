@@ -27,9 +27,14 @@ def replyToTweet(api, searchResults):
     tweetID = randomTweet.id
     api.update_status(tweet, tweetID)
 
+def searchForNegativeTweets(api, searchTerm):
+    searchResults = [status for status in tweepy.
+                     Cursor(api.search, q=searchTerm).items(100)]
+    return searchResults
 
 if __name__ == "__main__":
     api = setTwitterAuth()
-    keyword = "fuck"
+    keyword = "depressed"
     searchResults = searchTweet(api, "\"" + keyword +"\"")
-    replyToTweet(api, searchResults)
+    #replyToTweet(api, searchResults)
+    print(searchResults[0].id)

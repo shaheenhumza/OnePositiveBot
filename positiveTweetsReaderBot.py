@@ -17,10 +17,10 @@ def searchForPositiveTweets(api, searchTerm):
     return searchResults
 
 def writeToFile(searchResults):
-    f = open("positiveTweets.txt", "r")
-    file = open("positiveTweets.txt", "a")
+    fileToRead = open("positiveTweets.txt", "r")
+    fileToWrite = open("positiveTweets.txt", "a")
     for searchResult in searchResults:
-        if searchResult.text not in f:
+        if searchResult.text not in fileToRead:
             if(classify(searchResult.text) > 0.25):
                 tweet = (searchResult.text).split(" ")
                 for word in tweet:
@@ -35,10 +35,10 @@ def writeToFile(searchResults):
                     elif "RT" in word:
                         pass
                     else:
-                        file.write(word + " ")
-    file.write("\n")
-    f.close()
-    file.close()
+                        fileToWrite.write(word + " ")
+    fileToWrite.write("\n")
+    fileToRead.close()
+    fileToWrite.close()
 
 if __name__ == "__main__":
     api = setTwitterAuth()

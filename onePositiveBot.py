@@ -3,6 +3,7 @@ import os
 from markovbot import MarkovBot
 import tweepy
 import random
+import time
 
 
 def setTwitterAuth():
@@ -43,24 +44,30 @@ tweetbot = markov()
 tweetbot.twitter_login(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 #thread that listens to the target string "depressed" in twitter
-targetstring = 'depressed'
+targetstring = None
 keywords = ['life', 'motivation', 'happy', 'success', 'dream']
-prefix = None
+prefix = "@onepositivebot"
 suffix = '#OnePositiveBot'
 maxconvdepth = 2
-tweetbot.twitter_autoreply_start(targetstring, keywords=keywords, prefix=prefix, suffix=suffix, maxconvdepth=maxconvdepth)
+#tweetbot.twitter_autoreply_start(targetstring, keywords=keywords, prefix=prefix, suffix=suffix, maxconvdepth=maxconvdepth)
 
 #thread that makes the bot tweet something positive automatically every 30s
-seeds = ['happy', 'funny', 'joy', 'love']
-tweetbot.twitter_tweeting_start(days=0, hours=0, minutes=1, keywords=seeds, prefix=None, suffix='#OnePositiveBot')
+#seeds = ['happy', 'funny', 'joy', 'love']
+#tweetbot.twitter_tweeting_start(days=0, hours=0, minutes=1, keywords=seeds, prefix=None, suffix='#OnePositiveBot')
 
 #main thread that choses a random news twitter account and substitutes its last tweet
 api = setTwitterAuth()
 newsAccounts = ["bbcworld", "CNN", "BBCBreaking", "cnnbrk", "SkyNewsBreak"]
 while True:
+
     #choose a random news account
     #newsAccount = newsAccounts[random.randint(0, len(newsAccounts) - 1)]
     #get that accounts info and last tweet
     #user = api.get_user(newsAccount)
     #tweet = getTimeline(api, user)
     #print(user.screen_name)
+
+    #generate reply to tweet
+    tweetbot.twitter_tweeting_start(days=0, hours=0, minutes=1, keywords=keywords, prefix="@onepositivebot", suffix='#OnePositiveBot')
+    print("ok")
+    time.sleep(60*1)
