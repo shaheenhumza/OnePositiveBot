@@ -3,12 +3,14 @@ import tweepy
 import random
 import time
 from classify import *
-import combineTextFiles
+from combineTextFiles import combineTextFiles
+from secret import ACCESS_SECRET, ACCESS_TOKEN, CONSUMER_KEY, CONSUMER_SECRET
+
 
 
 def setTwitterAuth():
-    auth = tweepy.OAuthHandler("RmtBCm2LkNznww3qV0q2Kra7M", "bNFutIDNOJSZ9ENY1DQ1fsMEEbZdYG6kcMF9adn92JurXK086r")
-    auth.set_access_token("929349249506201600-kZkbI2rlRsXrj1gmDkqJhSITRHUVSoB", "c0ABYCdIDJJTgFCfgtULY8bgDQt4vHnjipHjkhieIRSo7")
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
     api = tweepy.API(auth)
     return api
 

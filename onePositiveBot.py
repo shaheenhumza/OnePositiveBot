@@ -5,7 +5,6 @@ import tweepy
 import random
 import time
 from classify import *
-from stringReplacement import filter
 
 
 def setTwitterAuth():
@@ -89,8 +88,8 @@ while True:
     replyToDepressed(api, searchResults)
     time.sleep(60*10) #sleep for 10 minuts
 
-    replyToNewsAccount(api)
-    time.sleep(60*5)
+    #replyToNewsAccount(api)
+    #time.sleep(60*5)
 
 tweetbot.twitter_autoreply_stop()
 tweetbot.twitter_tweeting_stop()
