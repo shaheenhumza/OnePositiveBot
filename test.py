@@ -11,7 +11,7 @@ def setTwitterAuth():
     return api
 
 def tweetHelloWorld(api):
-    api.update_status("Hello, World! #{}"
+    api.update_status("Hello, World! \U0001F916 #{}"
                       .format(random.randint(0, 10000)))
 
 def searchTweet(api, searchTerm):
@@ -35,6 +35,6 @@ def searchForNegativeTweets(api, searchTerm):
 if __name__ == "__main__":
     api = setTwitterAuth()
     keyword = "depressed"
-    searchResults = searchTweet(api, "\"" + keyword +"\"")
+    #searchResults = searchTweet(api, "\"" + keyword +"\"")
     #replyToTweet(api, searchResults)
-    print(searchResults[0].id)
+    tweetHelloWorld(api)

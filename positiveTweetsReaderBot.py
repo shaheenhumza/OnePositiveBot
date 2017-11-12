@@ -13,7 +13,7 @@ def setTwitterAuth():
 
 def searchForPositiveTweets(api, searchTerm):
     searchResults = [status for status in tweepy.
-                     Cursor(api.search, q=searchTerm).items(100)]
+                     Cursor(api.search, q=searchTerm).items(200)]
     return searchResults
 
 def writeToFile(searchResults):
@@ -44,8 +44,8 @@ if __name__ == "__main__":
     api = setTwitterAuth()
     positivewords = [ "stop bullying", "inspiration"
                     , "positivism", "positive thinking", "inspirational"
-                    , "kind", "nice", "joke", "funny", "happiness"
-                    ,"funny", "purpose", "YOLO", "keep going"
+                    , "kind", "nice", "funny", "happiness"
+                    ,"funny", "purpose", "keep going"
                     ,"never give up", "look ahead", "learn from your mistakes"
                     ,"keep trying", "love", "friend", "friendship", "will to"
                     ,"happy", "positive", "life goal", "light in my"
@@ -57,3 +57,4 @@ if __name__ == "__main__":
             searchResults = searchForPositiveTweets(api, "\"" + positiveword +"\"")
             writeToFile(searchResults)
             time.sleep(60*2)#two minutes
+        time.sleep(60*60*3)#sleep for 3 hours
