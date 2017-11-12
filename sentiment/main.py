@@ -15,20 +15,24 @@ def searchTweet(api, searchTerm):
     return searchResults
 
 def searchUsersFor(api, keyword):
-	f = open("usersToTweetTo.txt", "a")
+	f = open("usersToTweetTo.txt", "a+")
 	searchResults = searchTweet(api, "\"" + keyword +"\"")
+	
 	for item in searchResults:
-		if(classify(item.text) < -0.5):
+		data = str(item.user.screen_name) + " " + str(item.id) + "\n"
+		if(classify(item.text) < -0.5 and data not in f):
 			f.write(item.user.screen_name)
 			f.write(" ")
 			f.write(str(item.id))
 			f.write("\n")
 
-
+def searchUsersForA(api, keyword):
+	f = open("usersToTweetTo.txt", "a+")
+	searchResults = searchTweet(api, "\"" + keyword +"\"")
+	for item in searchResults:
+		data = str(item.user.screen_name) + " " + str(item.id) + "\n"
+		if(classify(item.text) < -0.5 and data not in f):
+			print data
 
 api = setTwitterAuth()
-searchUsersFor(api, "depressed")
-print "finisheasasd"
-f = open("usersToTweetTo.txt", "a")
-f.write("----------------------")
-searchUsersFor(api, "suicide")
+searchUsersFor(api, "a")
