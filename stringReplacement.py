@@ -1,7 +1,7 @@
 def filter(tweet):
-	tweet = tweet.split()
+	tweet = tweet.lower().split()
 	print tweet
-	for i in range(0, len(tweet) - 1):
+	for i in range(0, len(tweet)-1):
 		if tweet[i] == "witnesses":
 			tweet[i] = "these dudes i know"
 
@@ -32,7 +32,20 @@ def filter(tweet):
 		elif tweet[i] == "senator":
 			tweet[i] = "elf-lord"
 
-	return "".join(tweet)
+		elif tweet[i] == "president":
+			tweet[i] = "self proclaimed leader"
+
+		elif tweet[i] == "donald":
+			if tweet[i+1] == "trump":
+				tweet[i] = ""
+				tweet[i+1] = "leader of the free world"
+			else:
+				tweet[i] = "leader of the free world"
+
+		elif tweet[i] == "president":
+			tweet[i] = "self proclaimed leader"
+
+	return " ".join(tweet)
 
 
-print filter("w sdfs witnesses sdf kjasnf kbksd allegedly")
+print filter("w sdfs Donald trump kjasnf kbksd allegedly")
