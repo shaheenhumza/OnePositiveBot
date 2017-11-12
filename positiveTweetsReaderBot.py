@@ -3,6 +3,7 @@ import tweepy
 import random
 import time
 from classify import *
+import combineTextFiles
 
 
 def setTwitterAuth():
@@ -13,7 +14,7 @@ def setTwitterAuth():
 
 def searchForPositiveTweets(api, searchTerm):
     searchResults = [status for status in tweepy.
-                     Cursor(api.search, q=searchTerm).items(200)]
+                     Cursor(api.search, q=searchTerm, lang="en").items(200)]
     return searchResults
 
 def writeToFile(searchResults):
@@ -21,7 +22,7 @@ def writeToFile(searchResults):
     fileToWrite = open("positiveTweets.txt", "a")
     for searchResult in searchResults:
         if searchResult.text not in fileToRead:
-            if(classify(searchResult.text) > 0.25):
+            if(classify(searchResult.text) > 0.5):
                 tweet = (searchResult.text).split(" ")
                 for word in tweet:
                     if "@" in word:
@@ -44,11 +45,10 @@ if __name__ == "__main__":
     api = setTwitterAuth()
     positivewords = [ "stop bullying", "inspiration"
                     , "positivism", "positive thinking", "inspirational"
-                    , "kind", "nice", "funny", "happiness"
-                    ,"funny", "purpose", "keep going"
+                    , "happiness" , "purpose", "keep going"
                     ,"never give up", "look ahead", "learn from your mistakes"
-                    ,"keep trying", "love", "friend", "friendship", "will to"
-                    ,"happy", "positive", "life goal", "light in my"
+                    ,"keep trying", "friendship", "will to"
+                    , "positivity", "life goal", "light in my"
                     ,"motivational"]
 
     while True:
@@ -57,4 +57,5 @@ if __name__ == "__main__":
             searchResults = searchForPositiveTweets(api, "\"" + positiveword +"\"")
             writeToFile(searchResults)
             time.sleep(60*2)#two minutes
+        combineTextFiles()
         time.sleep(60*60*3)#sleep for 3 hours
